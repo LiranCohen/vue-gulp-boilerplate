@@ -9,8 +9,9 @@ const rename = require('gulp-rename');
 const vueify = require('vueify')
 
 gulp.task('build', function siteBuilder(){
-    const bundler = browserify('./main.js', {debug: true})
+    const bundler = browserify('./src/main.js', {debug: true})
         .transform(babelify, {presets: ['env']});
+        .transform(vueify);
 
     return bundler.bundle()
         .on('error', function(err){
@@ -26,7 +27,7 @@ gulp.task('build', function siteBuilder(){
 });
 
 gulp.task('dev', function siteJsBuilder() {
-    const bundler = browserify('./main.js', {debug: true})
+    const bundler = browserify('./src/main.js', {debug: true})
         .transform(babelify, {presets: ['env']});
     
    return bundler.bundle()
@@ -43,7 +44,7 @@ gulp.task('dev', function siteJsBuilder() {
 });
 
 gulp.task('vue', function () {
-    const bundler = browserify('./main.js', {debug: true})
+    const bundler = browserify('./src/main.js', {debug: true})
         .transform(babelify, {presets: ['env']})
         .transform(vueify);
 
